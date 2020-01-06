@@ -21,7 +21,5 @@ COCO2017
 | FasterRCNN-R50-FPN   | 37.4       | 39.2         |
 | FasterRCNN-X101-FPN  | 41.2       | 42.6         |
 
-
-## Installation
-Please refer for ImageNet classification and refer for COCO detection.
+You can find pretrained models to achieve the results in [models](https://drive.google.com/drive/folders/12Vs8i3OrafXV5NjzuJVCHsa5i4oF9gmu?usp=sharing)
 
