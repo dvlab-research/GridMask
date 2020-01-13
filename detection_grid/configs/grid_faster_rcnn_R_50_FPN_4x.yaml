@@ -8,8 +8,8 @@ GRID:
   PROB: 0.7
 MODEL:
   META_ARCHITECTURE: "GeneralizedRCNN"
-#  WEIGHT: "catalog://ImageNetPretrained/MSRA/R-50"
-  WEIGHT: "pretrainmodel/R-50.pkl"
+  WEIGHT: "catalog://ImageNetPretrained/MSRA/R-50"
+#  WEIGHT: "pretrainmodel/R-50.pkl"
   BACKBONE:
     CONV_BODY: "R-50-FPN"
   RESNETS:
