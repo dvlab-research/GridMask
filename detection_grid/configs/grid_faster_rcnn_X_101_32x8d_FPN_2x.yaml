@@ -8,8 +8,8 @@ GRID:
   PROB: 0.7
 MODEL:
   META_ARCHITECTURE: "GeneralizedRCNN"
-  #WEIGHT: "catalog://ImageNetPretrained/FAIR/20171220/X-101-32x8d"
-  WEIGHT: "pretrainmodel/X-101-32x8d.pkl"
+  WEIGHT: "catalog://ImageNetPretrained/FAIR/20171220/X-101-32x8d"
+  #WEIGHT: "pretrainmodel/X-101-32x8d.pkl"
   BACKBONE:
     CONV_BODY: "R-101-FPN"
   RPN:
