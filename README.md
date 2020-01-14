@@ -2,7 +2,7 @@
 
 ## Introduction
 This project is the code for implementing the GridMask augmentation for image classification and object detection.
-The full paper is available at: [https://arxiv.org/abs](https://arxiv.org/abs). 
+The full paper is available at: [https://arxiv.org/abs/2001.04086](http://arxiv.org/abs/2001.04086). 
 
 ## Main Result
 
