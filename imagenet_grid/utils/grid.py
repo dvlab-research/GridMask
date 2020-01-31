@@ -11,7 +11,7 @@ class Grid(object):
         self.rotate = rotate
         self.ratio = ratio
         self.mode=mode
-        self.st_prob = prob
+        self.st_prob = self.prob = prob
 
     def set_prob(self, epoch, max_epoch):
         self.prob = self.st_prob * min(1, epoch / max_epoch)
