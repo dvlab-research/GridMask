@@ -3,6 +3,7 @@ import torch.nn as nn
 import numpy as np
 from PIL import Image
 import pdb
+import math
 
 class Grid(object):
     def __init__(self, d1, d2, rotate = 1, ratio = 0.5, mode=0, prob=1.):
@@ -21,12 +22,20 @@ class Grid(object):
             return img
         h = img.size(1)
         w = img.size(2)
-        hh = int(1.5*h)
-        ww = int(1.5*w)
+        
+        # 1.5 * h, 1.5 * w works fine with the squared images
+        # But with rectangular input, the mask might not be able to recover back to the input image shape
+        # A square mask with edge length equal to the diagnoal of the input image 
+        # will be able to cover all the image spot after the rotation. This is also the minimum square.
+        hh = math.ceil((math.sqrt(h*h + w*w)))
+        
         d = np.random.randint(self.d1, self.d2)
         #d = self.d
-        self.l = int(d*self.ratio+0.5)
-        mask = np.ones((hh, ww), np.float32)
+        
+        # maybe use ceil? but i guess no big difference
+        self.l = math.ceil(d*self.ratio)
+        
+        mask = np.ones((hh, hh), np.float32)
         st_h = np.random.randint(d)
         st_w = np.random.randint(d)
         for i in range(-1, hh//d+1):
@@ -35,17 +44,17 @@ class Grid(object):
                 s = max(min(s, hh), 0)
                 t = max(min(t, hh), 0)
                 mask[s:t,:] *= 0
-        for i in range(-1, ww//d+1):
+        for i in range(-1, hh//d+1):
                 s = d*i + st_w
                 t = s+self.l
-                s = max(min(s, ww), 0)
-                t = max(min(t, ww), 0)
+                s = max(min(s, hh), 0)
+                t = max(min(t, hh), 0)
                 mask[:,s:t] *= 0
         r = np.random.randint(self.rotate)
         mask = Image.fromarray(np.uint8(mask))
         mask = mask.rotate(r)
         mask = np.asarray(mask)
-        mask = mask[(hh-h)//2:(hh-h)//2+h, (ww-w)//2:(ww-w)//2+w]
+        mask = mask[(hh-h)//2:(hh-h)//2+h, (hh-w)//2:(hh-w)//2+w]
 
         mask = torch.from_numpy(mask).float().cuda()
         if self.mode == 1:
